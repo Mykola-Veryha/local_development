@@ -1,0 +1,5 @@
+local_development.config_page:
+  title: 'Local Development'
+  parent: system.admin_config_development
+  description: 'Local Development'
+  route_name: local_development.config_page

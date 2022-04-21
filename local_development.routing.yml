@@ -1,0 +1,7 @@
+local_development.config_page:
+  path: '/admin/config/development/local'
+  defaults:
+    _form: '\Drupal\local_development\Form\LocalDevelopmentConfigForm'
+    _title: 'Local Development'
+  requirements:
+    _permission: 'pf_host edit user guide'
