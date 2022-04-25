@@ -1,0 +1,7 @@
+services:
+  local_development.core_csp_subscriber:
+    class: Drupal\local_development\EventSubscriber\ResponseCspSubscriber
+    arguments:
+      - '@current_route_match'
+    tags:
+      - { name: event_subscriber }
