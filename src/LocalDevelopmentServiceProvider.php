@@ -2,8 +2,10 @@
 
 namespace Drupal\local_development;
 
+use Drupal\Core\Cache\NullBackendFactory;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -23,6 +25,16 @@ class LocalDevelopmentServiceProvider extends ServiceProviderBase {
         new Reference('state'),
       ]);
     }
+    $container->setDefinition('cache.backend.null', new Definition(NullBackendFactory::class));
+
+    // In order to avoid CORS policy errors, website’s resources
+    // can be accessed by any origin.
+    $cors_config = $container->getParameter('cors.config');
+    $cors_config['allowedOrigins'] = ['*'];
+    $cors_config['allowedHeaders'] = ['*'];
+    $cors_config['allowedMethods'] = ['*'];
+    $cors_config['enabled'] = TRUE;
+    $container->setParameter('cors.config', $cors_config);
   }
 
 }

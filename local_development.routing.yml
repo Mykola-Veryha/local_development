@@ -4,4 +4,11 @@ local_development.config_page:
     _form: '\Drupal\local_development\Form\LocalDevelopmentConfigForm'
     _title: 'Local Development'
   requirements:
-    _permission: 'pf_host edit user guide'
+    _access: 'TRUE'
+local_development.account:
+  path: '/local-development-account'
+  defaults:
+    _controller: 'Drupal\local_development\Controller\UserController::account'
+    _title: 'Account'
+  requirements:
+    _access: 'TRUE'

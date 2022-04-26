@@ -35,6 +35,9 @@ class GlobalAccountProxy extends AccountProxy {
    * {@inheritdoc}
    */
   public function getAccount(): AccountInterface {
+    if (isset($this->account)) {
+      return $this->account;
+    }
     if ($this->state->get(LocalDevelopmentConfigForm::STATUS_CONFIG_NAME, FALSE)) {
       $active_uid = (int) $this->state->get(LocalDevelopmentConfigForm::USER_ID_CONFIG_NAME, 0);
       if (!empty($active_uid)) {
