@@ -34,6 +34,7 @@ class LocalDevelopmentServiceProvider extends ServiceProviderBase {
     $cors_config['allowedHeaders'] = ['*'];
     $cors_config['allowedMethods'] = ['*'];
     $cors_config['enabled'] = TRUE;
+    $cors_config['supportsCredentials'] = TRUE;
     $container->setParameter('cors.config', $cors_config);
   }
 
