@@ -56,6 +56,7 @@ class UserController extends ControllerBase {
     $user = $this->userStorage->load($this->currentUser()->id());
     $user_values = [
       'id' => $user->id(),
+      'uid' => $user->id(),
       'uuid' => $user->uuid(),
       'roles' => $user->getRoles(),
       'firstName' => '',

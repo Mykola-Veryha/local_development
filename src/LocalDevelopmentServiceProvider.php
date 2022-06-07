@@ -5,6 +5,7 @@ namespace Drupal\local_development;
 use Drupal\Core\Cache\NullBackendFactory;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
+use Drupal\local_development\EventSubscriber\DisabledSecKitEventSubscriber;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -24,6 +25,10 @@ class LocalDevelopmentServiceProvider extends ServiceProviderBase {
         new Reference('event_dispatcher'),
         new Reference('state'),
       ]);
+    }
+    if ($container->hasDefinition('seckit.subscriber')) {
+      $definition = $container->getDefinition('seckit.subscriber');
+      $definition->setClass(DisabledSecKitEventSubscriber::class);
     }
     $container->setDefinition('cache.backend.null', new Definition(NullBackendFactory::class));
 
