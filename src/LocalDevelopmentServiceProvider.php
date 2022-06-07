@@ -6,6 +6,7 @@ use Drupal\Core\Cache\NullBackendFactory;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
 use Drupal\local_development\EventSubscriber\DisabledSecKitEventSubscriber;
+use Drupal\local_development\Logger\LogFilter;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -29,6 +30,11 @@ class LocalDevelopmentServiceProvider extends ServiceProviderBase {
     if ($container->hasDefinition('seckit.subscriber')) {
       $definition = $container->getDefinition('seckit.subscriber');
       $definition->setClass(DisabledSecKitEventSubscriber::class);
+    }
+    // Exclude some unwanted log messages.
+    if ($container->hasDefinition('logger.dblog')) {
+      $definition = $container->getDefinition('logger.dblog');
+      $definition->setClass(LogFilter::class);
     }
     $container->setDefinition('cache.backend.null', new Definition(NullBackendFactory::class));
 
