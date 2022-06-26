@@ -61,7 +61,7 @@ class UserController extends ControllerBase {
       'roles' => $user->getRoles(),
       'firstName' => '',
       'lastName' => '',
-      'isDelegate' => false,
+      'isDelegate' => FALSE,
       'title' => 'Mr. Title',
       'country' => '',
       'token' => [
