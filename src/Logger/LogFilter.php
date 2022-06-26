@@ -12,7 +12,7 @@ class LogFilter extends DbLog {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = array()) {
+  public function log($level, $message, array $context = []) {
     $chanel = $context['channel'] ?? '';
     $excluded_channels = ['pfizer_performance'];
     if (!in_array($chanel, $excluded_channels, TRUE)) {
